@@ -1,0 +1,29 @@
+name: Deploy Workflow
+
+on:
+  push:
+    branches:
+      - dev  # Solo ejecuta el flujo cuando hay cambios en la rama "dev"
+
+jobs:
+  deploy-to-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Simulate deploy to Dev
+        run: echo "Deploying to Development..."
+
+  deploy-to-staging:
+    name: Deploy to Staging
+    needs: deploy-to-dev  # Solo corre si el deploy a Dev se ejecutó
+    runs-on: ubuntu-latest
+    environment: staging  # Usa el ambiente de Staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Simulate deploy to Staging
+        run: echo "Deploying to Staging..."
